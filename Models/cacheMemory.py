@@ -15,8 +15,12 @@ class CacheMemory:
 
     def toStringCache(self):
         print("Cache Blocks:")
-        print("    {}    |    {}    |    {}    |    {}   "
-        .format(self.cacheBlocks[0], self.cacheBlocks[1], self.cacheBlocks[2], self.cacheBlocks[3]))
+
+        for data in self.cacheBlocks:
+            
+            print(data, "  |  ", end = "")
+
+        print("")
 
 
     

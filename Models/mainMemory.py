@@ -34,7 +34,7 @@ class MainMemory:
         for data in self.memoryBlocks:
             print(data,"  |  ", end = "")
 
-        print("\n")    
+        print("")    
 
 def mainMemory():
     

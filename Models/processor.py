@@ -1,5 +1,6 @@
 import random, itertools, time
-
+from cacheMemory import CacheMemory
+from mainMemory import MainMemory
 
 class Processor:
 
@@ -11,19 +12,20 @@ class Processor:
         self.currentInstruction = []
         self.isProcessing = False
         self.isOn = False
+        self.myL1Cache = CacheMemory()
+        self.myMainMemory = MainMemory.getMemoryInstance()
 
     def getProcessor(self): return self.processorID
     def getCurrentInstruction(self): return self.currentInstruction
     def getIsProcessing(self): return self.isProcessing
     def getIsOn(self): return self.isOn
-    #def getL1Cache():
+    def getL1Cache(self): return self.myL1Cache
+    def getMainMemory(self): return self.myMainMemory
+    
     #def getMemoryController():
-    #def getMainMemory()
-
-    #def setMainMemory()
     #def setMemoryController()
-    #def setL1Cache()
 
+    
     def setCurrentInstruction(self, _currentInstruction):
 
         self.currentInstruction = _currentInstruction
@@ -99,14 +101,8 @@ def mainProcessor():
 
     p0 = Processor()
     p1 = Processor()
-    p2 = Processor()
-    p0.setCurrentInstruction(["READ", 0b1010, 0xA])
-    p1.setCurrentInstruction(["WRITE", 0b0001, 0x4B])
-    p2.setCurrentInstruction(["CALC"])
-    p0.toStringCurrentInstruction()
-    p1.toStringCurrentInstruction()
-    p2.toStringCurrentInstruction()
-    p1.calcInstruction()
+    p0.getMainMemory().updateMemory(2,3)
+    p1.getMainMemory().toStringMemory()
 
 
 if __name__ == "__main__":
