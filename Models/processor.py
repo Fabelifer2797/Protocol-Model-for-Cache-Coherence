@@ -10,10 +10,12 @@ class Processor:
         self.processorID = next(Processor.processorCounter)
         self.currentInstruction = []
         self.isProcessing = False
+        self.isOn = False
 
     def getProcessor(self): return self.processorID
     def getCurrentInstruction(self): return self.currentInstruction
     def getIsProcessing(self): return self.isProcessing
+    def getIsOn(self): return self.isOn
     #def getL1Cache():
     #def getMemoryController():
     #def getMainMemory()
@@ -29,6 +31,10 @@ class Processor:
     def setIsProcessing(self, _isProcessing):
 
         self.isProcessing = _isProcessing
+
+    def setIsOn(self, _isOn):
+
+        self.isOn = _isOn
 
     def runProcessor(self): return 0
 
