@@ -23,7 +23,6 @@ class Processor:
     def getMainMemory(self): return self.myMainMemory
     
     #def getMemoryController():
-    #def setMemoryController()
 
     
     def setCurrentInstruction(self, _currentInstruction):
