@@ -24,6 +24,10 @@ class MainMemory:
 
         return self.memoryBlocks
 
+    def getBlockData(self, dirMem):
+
+        return self.memoryBlocks[dirMem]
+
     def updateMemory(self, blockNumber, data):
 
         self.memoryBlocks[blockNumber] = data
@@ -32,7 +36,7 @@ class MainMemory:
         print("Memory Blocks:")
 
         for data in self.memoryBlocks:
-            print(data,"  |  ", end = "")
+            print(hex(data),"  |  ", end = "")
 
         print("")    
 
