@@ -1,15 +1,18 @@
 import random, itertools, time
-from cacheMemory import CacheMemory
-from mainMemory import MainMemory
-from memoryController import MemoryController
-from bus import Bus
+import threading
+from Models.cacheMemory import CacheMemory
+from Models.mainMemory import MainMemory
+from Models.memoryController import MemoryController
+from Models.bus import Bus
 
-class Processor:
+threadLock = threading.Lock()
+
+class Processor(threading.Thread):
 
     processorCounter = itertools.count()
     
-    def __init__(self):
-        
+    def __init__(self, maxIter):
+        threading.Thread.__init__(self)
         self.processorID = next(Processor.processorCounter)
         self.currentInstruction = []
         self.isProcessing = False
@@ -17,8 +20,11 @@ class Processor:
         self.myL1Cache = CacheMemory()
         self.myMainMemory = MainMemory.getMemoryInstance()
         self.myMemoryController = MemoryController(self.processorID)
+        self.maxIteration = maxIter
+
 
     def getProcessor(self): return self.processorID
+    def getMaxIteration(self): return self.maxIteration
     def getCurrentInstruction(self): return self.currentInstruction
     def getIsProcessing(self): return self.isProcessing
     def getIsOn(self): return self.isOn
@@ -39,7 +45,33 @@ class Processor:
 
         self.isOn = _isOn
 
-    def runProcessor(self): return 0
+    # Override function run() of Thread Class
+    def run(self):
+
+        counter = 0
+
+        while counter < self.getMaxIteration():
+            time.sleep(5)
+            self.instructionGenerator()
+            currentInst = self.getCurrentInstruction()
+            if currentInst[0] == "CALC":
+                self.calcInstruction()
+                self.displayInformation()
+                counter += 1
+
+            else:
+                self.memoryInstruction()
+                self.displayInformation()
+                counter += 1
+
+    def displayInformation(self):
+        print("***************************************************************************")
+        self.toStringCurrentInstruction()
+        threadLock.acquire()
+        self.getMainMemory().toStringMemory()
+        self.getL1Cache().toStringCacheComplete()
+        self.getMemoryController().toStringDirectoryValues()
+        threadLock.release()
 
     def stopProcessor(self): return 0
 
@@ -72,7 +104,7 @@ class Processor:
     def calcInstruction(self):
 
         print("Processor P{} is doing some calculations...".format(self.processorID))
-        time.sleep(2.5)
+        time.sleep(2)
         print("Processor P{} has finished the calculations...".format(self.processorID))
 
     def memoryInstruction(self):
@@ -80,10 +112,11 @@ class Processor:
         print("Processor P{} is executing some memory instruction...".format(self.processorID))
         currentInst = self.getCurrentInstruction()
         instructionType = currentInst[0]
-        myL1Cache = self.getL1Cache()
         myMemoryController = self.getMemoryController()
         dirMem = currentInst[1]
         cacheDir = myMemoryController.getCacheBlock1_way(dirMem)
+        threadLock.acquire()
+        myL1Cache = self.getL1Cache()
         validBit = myL1Cache.getCacheBlocks()[cacheDir][0]
         cacheTag = myL1Cache.getCacheBlocks()[cacheDir][1]
 
@@ -110,6 +143,8 @@ class Processor:
                 print("WRITE MISS Processor P{}".format(self.getProcessor()))
                 myMemoryController.addressingWriteMiss(cacheDir, dirMem, myL1Cache, self.getMainMemory(), currentInst[2])
 
+        threadLock.release()
+        time.sleep(4)
         print("Processor P{} has finished the memory instruction...".format(self.processorID))
 
 

@@ -1,4 +1,4 @@
-from bus import Bus
+from Models.bus import Bus
 
 class MemoryController:
 
