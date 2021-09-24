@@ -40,6 +40,17 @@ class CacheMemory:
             end = "")
         
         print("")
+
+    def getPrintCache(self):
+
+        returnMatrix = []
+        counter = 0
+
+        for block in self.getCacheBlocks():
+            returnMatrix.append([format(counter,'02b'),format(block[0],'b'),format(block[1],'02b'),format(block[2],'016X')]) 
+            counter += 1
+        return returnMatrix
+
     
 def mainCacheMemory():
 

@@ -38,7 +38,17 @@ class MainMemory:
         for data in self.memoryBlocks:
             print(hex(data),"  |  ", end = "")
 
-        print("")    
+        print("") 
+
+    def getPrintMemory(self):
+
+        returnMatrix = []
+        counter = 0
+
+        for data in self.getMemoryBlocks():
+            returnMatrix.append([format(counter,'04b'),format(data,'016X')]) 
+            counter += 1
+        return returnMatrix   
 
 def mainMemory():
     

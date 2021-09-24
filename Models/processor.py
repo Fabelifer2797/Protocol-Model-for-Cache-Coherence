@@ -11,16 +11,18 @@ class Processor(threading.Thread):
 
     processorCounter = itertools.count()
     
-    def __init__(self, maxIter):
+    def __init__(self, maxIter, _GUI):
         threading.Thread.__init__(self)
         self.processorID = next(Processor.processorCounter)
         self.currentInstruction = []
+        self.previousInstrcution = []
         self.isProcessing = False
         self.isOn = False
         self.myL1Cache = CacheMemory()
         self.myMainMemory = MainMemory.getMemoryInstance()
         self.myMemoryController = MemoryController(self.processorID)
         self.maxIteration = maxIter
+        self.GUI = _GUI
 
 
     def getProcessor(self): return self.processorID
@@ -65,18 +67,25 @@ class Processor(threading.Thread):
                 counter += 1
 
     def displayInformation(self):
-        print("***************************************************************************")
-        self.toStringCurrentInstruction()
+        currentInst = self.toStringCurrentInstruction()
+        previousInst = self.toStringPreviousInstruction()
+        self.GUI.loadDataITable(self.getProcessor(), [previousInst,currentInst])
+
+
         threadLock.acquire()
-        self.getMainMemory().toStringMemory()
-        self.getL1Cache().toStringCacheComplete()
-        self.getMemoryController().toStringDirectoryValues()
+        printCache = self.getL1Cache().getPrintCache()
+        self.GUI.loadDataCacheTable(self.getProcessor(), printCache)
+        printMemory = self.getMainMemory().getPrintMemory()
+        self.GUI.loadDataMemoryTable(printMemory)
+        printDirectory = self.getMemoryController().getPrintDirectory()
+        self.GUI.loadDatadirectoryTable(printDirectory)
         threadLock.release()
 
     def stopProcessor(self): return 0
 
     def instructionGenerator(self):
 
+        self.previousInstrcution = self.currentInstruction
         type = self.randomDist(2)
         currentInst = []
 
@@ -159,19 +168,39 @@ class Processor(threading.Thread):
             
             print("P", self.processorID, ":", sep = '', end = " ") 
             print(currentInst[0], format(currentInst[1],'04b'), ";", format(currentInst[2],'016X'))
+            return "P{}: {} {:04b}, {:016X}".format(self.processorID, currentInst[0], currentInst[1], currentInst[2])
 
         elif len(currentInst) == 2:
 
             print("P", self.processorID, ":", sep = '', end = " ") 
             print(currentInst[0], format(currentInst[1],'04b'))
+            return "P{}: {} {:04b}".format(self.processorID, currentInst[0], currentInst[1])
 
         elif len(currentInst) == 1:
 
             print("P", self.processorID, ":", sep = '', end = " ")
             print(currentInst[0])
+            return "P{}: {}".format(self.processorID, currentInst[0])
 
         else:
             print("P{}: Instruction set empty!".format(self.processorID))
+            return "P{}: STALL".format(self.processorID)
+
+    def toStringPreviousInstruction(self):
+
+        previousInst = self.previousInstrcution
+
+        if len(previousInst) == 3:
+            return "P{}: {} {:04b}, {:016X}".format(self.processorID, previousInst[0], previousInst[1], previousInst[2])
+
+        elif len(previousInst) == 2:
+            return "P{}: {} {:04b}".format(self.processorID, previousInst[0], previousInst[1])
+
+        elif len(previousInst) == 1:
+            return "P{}: {}".format(self.processorID, previousInst[0])
+
+        else:
+            return "P{}: STALL".format(self.processorID)
 
 
 

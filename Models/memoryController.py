@@ -382,6 +382,16 @@ class MemoryController:
             print("")
             counter += 1
 
+    def getPrintDirectory(self):
+
+        returnMatrix = []
+        counter = 0
+
+        for block in MemoryController.directory:
+            returnMatrix.append([format(counter,'02b'),format(block[0]),format(block[1],'b'),format(block[2],'b'),format(block[3],'b'),format(block[4],'b')]) 
+            counter += 1
+        return returnMatrix
+
 def mainMemoryController():
 
     memoryController1 = MemoryController(2)
