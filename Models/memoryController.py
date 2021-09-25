@@ -83,7 +83,8 @@ class MemoryController:
 
         if currentState == 'U':
 
-            print("There is no Read Hit for Uncached State")
+            #print("There is no Read Hit for Uncached State")
+            print("", end = "")
 
         elif currentState == 'S':
 
@@ -99,7 +100,8 @@ class MemoryController:
 
         if currentState == 'U':
 
-            print("There is no write Hit for Uncached State")
+            #print("There is no write Hit for Uncached State")
+            print("", end = "")
 
         elif currentState == 'S':
 
@@ -115,7 +117,8 @@ class MemoryController:
 
         if currentState == 'U':
 
-            print("There is no Block Replace for Uncached State")
+            #print("There is no Block Replace for Uncached State")
+            print("", end = "")
 
         elif currentState == 'S':
 
@@ -135,9 +138,10 @@ class MemoryController:
         self.updateDirectoryState(dirMem,'S')
         self.updateDirectoryValue(dirMem,self.getCurrentCPU(), 1)
 
-        if oldCacheBlock[1] == newCacheBlock[1]:
+        if oldCacheBlock[1] == newCacheBlock[1] or oldCacheBlock[0] == 0:
 
-            print("No Block Replace operation was needed")
+            #print("No Block Replace operation was needed")
+            print("", end = "")
 
         else:
 
@@ -153,9 +157,10 @@ class MemoryController:
         cacheL1.getCacheBlocks()[cacheDir] = newCacheBlock
         self.updateDirectoryValue(dirMem,self.getCurrentCPU(), 1)
 
-        if oldCacheBlock[1] == newCacheBlock[1]:
+        if oldCacheBlock[1] == newCacheBlock[1]  or oldCacheBlock[0] == 0:
 
-            print("No Block Replace operation was needed")
+            #print("No Block Replace operation was needed")
+            print("", end = "")
 
         else:
             
@@ -183,9 +188,10 @@ class MemoryController:
         self.updateDirectoryState(dirMem,'S')
         self.updateDirectoryValue(dirMem,self.getCurrentCPU(), 1)
 
-        if oldCacheBlock[1] == newCacheBlock[1]:
+        if oldCacheBlock[1] == newCacheBlock[1]  or oldCacheBlock[0] == 0:
 
-            print("No Block Replace operation was needed")
+            #print("No Block Replace operation was needed")
+            print("", end = "")
 
         else:
 
@@ -204,9 +210,10 @@ class MemoryController:
         self.updateDirectoryState(dirMem,'M/E')
         self.updateDirectoryValue(dirMem,self.getCurrentCPU(), 1)
 
-        if oldCacheBlock[1] == newCacheBlock[1]:
+        if oldCacheBlock[1] == newCacheBlock[1]  or oldCacheBlock[0] == 0:
 
-            print("No Block Replace operation was needed")
+            #print("No Block Replace operation was needed")
+            print("", end = "")
 
         else:
 
@@ -227,9 +234,10 @@ class MemoryController:
         MemoryController.directory[dirMem] = ['M/E',0,0,0,0]
         self.updateDirectoryValue(dirMem,self.getCurrentCPU(), 1)
 
-        if oldCacheBlock[1] == newCacheBlock[1]:
+        if oldCacheBlock[1] == newCacheBlock[1]  or oldCacheBlock[0] == 0:
 
-            print("No Block Replace operation was needed")
+            #print("No Block Replace operation was needed")
+            print("", end = "")
 
         else:
 
@@ -258,9 +266,10 @@ class MemoryController:
         MemoryController.directory[dirMem] = ['M/E',0,0,0,0]
         self.updateDirectoryValue(dirMem,self.getCurrentCPU(), 1)
 
-        if oldCacheBlock[1] == newCacheBlock[1]:
+        if oldCacheBlock[1] == newCacheBlock[1]  or oldCacheBlock[0] == 0:
 
-            print("No Block Replace operation was needed")
+            #print("No Block Replace operation was needed")
+            print("", end = "")
 
         else:
 
@@ -272,14 +281,14 @@ class MemoryController:
     def readHitS(self, cacheDir, cacheL1):
 
         cacheBlock = cacheL1.getCacheBlocks()[cacheDir]
-        print("Block readed: V = {}, Tag = {}, Data = {} ".format(cacheBlock[0], cacheBlock[1], hex(cacheBlock[2])))
-        print("No Block Replace operation was needed")
+        #print("Block readed: V = {}, Tag = {}, Data = {} ".format(cacheBlock[0], cacheBlock[1], hex(cacheBlock[2])))
+        #print("No Block Replace operation was needed")
 
     def readHitME(self, cacheDir, cacheL1):
         
         cacheBlock = cacheL1.getCacheBlocks()[cacheDir]
-        print("Block readed: V = {}, Tag = {}, Data = {} ".format(cacheBlock[0], cacheBlock[1], hex(cacheBlock[2])))
-        print("No Block Replace operation was needed")
+        #print("Block readed: V = {}, Tag = {}, Data = {} ".format(cacheBlock[0], cacheBlock[1], hex(cacheBlock[2])))
+        #print("No Block Replace operation was needed")
 
 
     def writeHitS(self,cacheDir, dirMem, cacheL1, newData):
@@ -297,17 +306,17 @@ class MemoryController:
             MemoryController.directory[dirMem] = ['M/E',0,0,0,0]
             self.updateDirectoryValue(dirMem,self.getCurrentCPU(), 1)
 
-        print("No Block Replace operation was needed")
+        #print("No Block Replace operation was needed")
 
     def writeHitME(self, cacheDir, cacheL1, newData):
 
         cacheL1.getCacheBlocks()[cacheDir][2] = newData
-        print("No Block Replace operation was needed")
+        #print("No Block Replace operation was needed")
 
 
     def blockReplaceS(self, dirMem):
 
-        print("Block replace: Shared state")
+        #print("Block replace: Shared state")
 
         if self.isOnly1CPU(dirMem):
 
@@ -320,7 +329,7 @@ class MemoryController:
 
     def blockReplaceME(self, oldDirMem, newData, _mainMemory):
 
-        print("Block replace: Modified/Exclusive state")
+        #print("Block replace: Modified/Exclusive state")
         _mainMemory.updateMemory(oldDirMem, newData)
         newDirectoryBlock = ['U',0,0,0,0]
         MemoryController.directory[oldDirMem] = newDirectoryBlock

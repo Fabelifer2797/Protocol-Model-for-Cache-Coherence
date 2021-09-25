@@ -13,6 +13,14 @@ class ApplicationScreen(QDialog):
         loadUi("multiCoreSystem.ui",self)
         self.setColumnWidthTables()
         self.setRowCountTables()
+        self.systemOn = False
+        self.manualMode = False
+        self.currentCPU = -1
+        self.currentInstruction = [] 
+        self.startButton.clicked.connect(self.startSystem)
+        self.pauseButton.clicked.connect(self.pauseSystem)
+        self.playButton.clicked.connect(self.playSystem)
+        self.enterButton.clicked.connect(self.enterInstruction)
 
 
     def setColumnWidthTables(self):
@@ -117,6 +125,39 @@ class ApplicationScreen(QDialog):
             for j in range(6):
                 self.directoryTable.setItem(i,j,QtWidgets.QTableWidgetItem(printData[i][j]))
 
+    def startSystem(self):
+        if self.systemOn:
+            print("Turning system off...")
+            self.systemOn = False
+        else:
+            print("Turning system on...")
+            self.systemOn = True
+
+    def pauseSystem(self):
+        self.systemOn = False
+        print("Stop system...")
+
+    def playSystem(self):
+        self.systemOn = True
+        print("Play system again...")
+
+    def enterInstruction(self):
+        self.manualMode = True
+        print("Turning manual mode on...")
+        cpuID = self.pEnter.text()
+        iType  = self.typeEnter.text()
+        address = self.addressEnter.text()
+        data = self. dataEnter.text()
+        self.currentCPU = int(cpuID)
+
+        if iType == "CALC":
+            self.currentInstruction = [iType]
+
+        elif iType == "READ":
+            self.currentInstruction = [iType,int(address)]
+        else:
+            self.currentInstruction = [iType,int(address),int(data)]
+
 def mainGUI():
 
     app = QApplication(sys.argv)
@@ -129,10 +170,10 @@ def mainGUI():
     widget.setWindowTitle("Protocol for Cache Coherence")
     widget.showMaximized() 
 
-    p0 = Processor(3,GUI)
-    p1 = Processor(3,GUI)
-    p2 = Processor(3,GUI)
-    p3 = Processor(3,GUI)
+    p0 = Processor(GUI)
+    p1 = Processor(GUI)
+    p2 = Processor(GUI)
+    p3 = Processor(GUI)
     threadArray = [p0,p1,p2,p3]
     systemBUs = Bus.getBusInstance()
     systemBUs.setProcessorArray(threadArray)
@@ -140,7 +181,7 @@ def mainGUI():
     p1.start()
     p2.start()
     p3.start()
-
+    print("System is off...")
 
     sys.exit(app.exec())
 

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1660</width>
-    <height>1500</height>
+    <height>1300</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,7 +22,7 @@
      <x>-90</x>
      <y>-20</y>
      <width>1500</width>
-     <height>2000</height>
+     <height>1500</height>
     </rect>
    </property>
    <property name="font">
@@ -662,8 +662,337 @@ background-color: rgb(85, 87, 83);</string>
      </property>
     </column>
    </widget>
+   <widget class="QLabel" name="label_11">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>990</y>
+      <width>251</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Purisa</family>
+      <pointsize>20</pointsize>
+      <weight>9</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 75 20pt &quot;Purisa&quot;; 
+color: rgb(238, 238, 236);</string>
+    </property>
+    <property name="text">
+     <string>System Controls</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="startButton">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>1070</y>
+      <width>121</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: qlineargradient(spread:pad, x1:0.194, y1:0.198864, x2:0.915423, y2:0.846591, stop:0 rgba(29, 33, 34, 255), stop:1 rgba(31, 231, 146, 255));</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>Icons/on-button.png</normaloff>Icons/on-button.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>121</width>
+      <height>101</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pauseButton">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>1070</y>
+      <width>121</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: qlineargradient(spread:pad, x1:0.194, y1:0.198864, x2:0.915423, y2:0.846591, stop:0 rgba(29, 33, 34, 255), stop:1 rgba(31, 231, 146, 255));</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>Icons/pause.svg</normaloff>Icons/pause.svg</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>121</width>
+      <height>101</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="playButton">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>1070</y>
+      <width>121</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: qlineargradient(spread:pad, x1:0.194, y1:0.198864, x2:0.915423, y2:0.846591, stop:0 rgba(29, 33, 34, 255), stop:1 rgba(31, 231, 146, 255));</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>Icons/play-button.png</normaloff>Icons/play-button.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>121</width>
+      <height>101</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_12">
+    <property name="geometry">
+     <rect>
+      <x>730</x>
+      <y>990</y>
+      <width>251</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Purisa</family>
+      <pointsize>20</pointsize>
+      <weight>9</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 75 20pt &quot;Purisa&quot;; 
+color: rgb(238, 238, 236);</string>
+    </property>
+    <property name="text">
+     <string>Manual Mode</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_13">
+    <property name="geometry">
+     <rect>
+      <x>730</x>
+      <y>1050</y>
+      <width>141</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Purisa</family>
+      <pointsize>12</pointsize>
+      <weight>9</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 75 12pt &quot;Purisa&quot;; 
+color: rgb(238, 238, 236);</string>
+    </property>
+    <property name="text">
+     <string>Processor ID</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_14">
+    <property name="geometry">
+     <rect>
+      <x>900</x>
+      <y>1050</y>
+      <width>161</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Purisa</family>
+      <pointsize>12</pointsize>
+      <weight>9</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 75 12pt &quot;Purisa&quot;; 
+color: rgb(238, 238, 236);</string>
+    </property>
+    <property name="text">
+     <string>Instruction Type</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_15">
+    <property name="geometry">
+     <rect>
+      <x>1090</x>
+      <y>1050</y>
+      <width>81</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Purisa</family>
+      <pointsize>12</pointsize>
+      <weight>9</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 75 12pt &quot;Purisa&quot;; 
+color: rgb(238, 238, 236);</string>
+    </property>
+    <property name="text">
+     <string>Address</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_16">
+    <property name="geometry">
+     <rect>
+      <x>1210</x>
+      <y>1050</y>
+      <width>81</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Purisa</family>
+      <pointsize>12</pointsize>
+      <weight>9</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 75 12pt &quot;Purisa&quot;; 
+color: rgb(238, 238, 236);</string>
+    </property>
+    <property name="text">
+     <string>Data</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pEnter">
+    <property name="geometry">
+     <rect>
+      <x>720</x>
+      <y>1120</y>
+      <width>131</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(0,0,0,0,0);
+font: 75 14pt &quot;Ubuntu Condensed&quot;;
+border-color: rgb(238, 238, 236);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="typeEnter">
+    <property name="geometry">
+     <rect>
+      <x>900</x>
+      <y>1120</y>
+      <width>141</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(0,0,0,0,0);
+font: 75 14pt &quot;Ubuntu Condensed&quot;;
+border-color: rgb(238, 238, 236);</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="addressEnter">
+    <property name="geometry">
+     <rect>
+      <x>1070</x>
+      <y>1120</y>
+      <width>113</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(0,0,0,0,0);
+font: 75 14pt &quot;Ubuntu Condensed&quot;;
+border-color: rgb(238, 238, 236);</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="dataEnter">
+    <property name="geometry">
+     <rect>
+      <x>1210</x>
+      <y>1120</y>
+      <width>113</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(0,0,0,0,0);
+font: 75 14pt &quot;Ubuntu Condensed&quot;;
+border-color: rgb(238, 238, 236);</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="enterButton">
+    <property name="geometry">
+     <rect>
+      <x>950</x>
+      <y>1190</y>
+      <width>211</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 20px;
+background-color: rgb(27, 217, 239);
+font: 14pt &quot;Ubuntu&quot;;
+color: white;</string>
+    </property>
+    <property name="text">
+     <string>Enter Instruction</string>
+    </property>
+   </widget>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="Icons/pause.qrc"/>
+  <include location="Icons/start.qrc"/>
+  <include location="Icons/play.qrc"/>
+ </resources>
  <connections/>
 </ui>
