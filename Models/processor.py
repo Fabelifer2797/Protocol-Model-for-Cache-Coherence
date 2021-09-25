@@ -7,6 +7,7 @@ from Models.bus import Bus
 import numpy as np
 
 threadLock = threading.Lock()
+threadLock2 = threading.Lock()
 
 class Processor(threading.Thread):
 
@@ -40,45 +41,54 @@ class Processor(threading.Thread):
     def run(self):
 
         while True:
+            
+            self.run2()
+            time.sleep(10)    
+        
+            
+    def run2(self):
 
-            time.sleep(10)
-            currentInst = []
+        threadLock2.acquire()
+        currentInst = []
+        
+        
+        if self.GUI.systemOn:
+            
+            print("System on... P{}".format(self.getProcessor()))
 
-            if self.GUI.systemOn:
-                
-                print("System on... P{}".format(self.getProcessor()))
-
-                if self.GUI.manualMode and self.GUI.currentCPU == self.getProcessor():
-                    self.GUI.manualMode = False
-                    self.GUI.currentCPU = -1
-                    currentInst = self.getCurrentInstruction()
-
-                else:
-                                    
-                    self.instructionGenerator()
-                    currentInst = self.getCurrentInstruction()
-                
-                
-                if currentInst[0] == "CALC":
-                    self.calcInstruction()
-                    self.displayInformation()
-                
-                else:
-                    self.memoryInstruction()
-                    self.displayInformation()
+            if self.GUI.manualMode and self.GUI.currentCPU == self.getProcessor():
+                self.GUI.manualMode = False
+                self.GUI.currentCPU = -1
+                currentInst = self.getCurrentInstruction()
 
             else:
-                print("System off... P{}".format(self.getProcessor()))
+                                
+                self.instructionGenerator()
+                currentInst = self.getCurrentInstruction()
+            
+            
+            if currentInst[0] == "CALC":
+                self.calcInstruction()
+                self.displayInformation()
+            
+            else:
+                self.memoryInstruction()
+                self.displayInformation()
 
-                if self.GUI.manualMode and self.GUI.currentCPU == self.getProcessor():
-                    
-                    self.previousInstrcution = self.currentInstruction
-                    self.setCurrentInstruction(self.GUI.currentInstruction)
-                    print("Instruction inserted in P{}".format(self.getProcessor()))
-                    self.GUI.systemOn = True
+            
 
-                continue
+        else:
+            print("System off... P{}".format(self.getProcessor()))
+
+            if self.GUI.manualMode and self.GUI.currentCPU == self.getProcessor():
                 
+                self.previousInstrcution = self.currentInstruction
+                self.setCurrentInstruction(self.GUI.currentInstruction)
+                print("Instruction inserted in P{}".format(self.getProcessor()))
+                self.GUI.systemOn = True
+        
+        threadLock2.release()
+
                 
 
     def displayInformation(self):
